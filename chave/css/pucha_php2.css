@@ -1,0 +1,18 @@
+section {
+    background: white;/*cor de fundo */
+    border-radius: 15px;/*bordas arredondadas*/
+    padding: 15px;/*espaço entre o texto e a borda*/
+    width: 672px;/*largura*/
+    margin: 0 auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.301);/* sobreamento e cor*/
+    float: left;
+}
+
+.adicionar {
+	background-color: rgba(146, 239, 148, 20);
+}
+
+.remover {
+	background-color: rgba(255, 124, 91, 22);
+
+}

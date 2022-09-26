@@ -1,0 +1,62 @@
+CREATE TABLE chave (
+    id_key int not null AUTO_INCREMENT,
+    codigo int not null,
+    nome varchar (50) not null,
+    situacao int,
+    PRIMARY KEY (id_key)
+) ENGINE = MyISAM;
+
+INSERT INTO chave (codigo, nome)
+VALUE (0001, 'Sala Treinamento');
+
+CREATE TABLE usuario (
+    id_user int not null AUTO_INCREMENT,
+    matricula bigint not null,
+    nomef varchar (50) not null,
+    empresa varchar (20) not null,
+    PRIMARY KEY (id_user)
+) ENGINE = MyISAM;
+
+INSERT INTO usuario (matricula, nomef)
+VALUE (001000259901, 'José Douglas Freire Cananéa');
+
+CREATE TABLE prevencao (
+    id_prev int not null AUTO_INCREMENT,
+    matricula bigint not null,
+    nomef varchar (50) not null,
+    PRIMARY KEY (id_prev)
+) ENGINE = MyISAM;
+
+INSERT INTO prevencao (matricula, nomef)
+VALUE (000252249, 'Luciana Débora');
+
+CREATE TABLE registro (
+    id_reg int not null AUTO_INCREMENT,
+    data date not null,
+    hora time not null,
+    id_user int not null,
+    id_key int not null,
+    id_prev int not null,
+    info varchar (10),
+    PRIMARY KEY (id_reg),
+    FOREIGN KEY (id_user) REFERENCES usuario(id_user),
+    FOREIGN KEY (id_key) REFERENCES chave(id_key),
+    FOREIGN KEY (id_prev) REFERENCES prevencao(id_prev)
+) ENGINE = MyISAM;
+
+
+select p.descricao, p.local_setor, p.valor, e.quantidade, u.login from produto p inner join estoque e on p.id_prod = e.id_prod INNER join usuario u on u.id_user = e.id_user where e.data_atual = '$selectdata';
+
+select u.nomef, c.nome, r.data_atual from usuario u inner JOIN registro r on u.id_user = r.id_user inner JOIN chave c on r.id_key = c.id_key WHERE r.data_atual BETWEEN '2020/05/10' and '2020/05/11'
+
+SELECT u.nomef, r.data_atual, c.nome, r.info, c.situacao FROM usuario u inner JOIN registro r on u.id_user = r.id_user inner JOIN chave c on r.id_key = c.id_key WHERE r.info = 'devolvida' or r.info = 'retirada'
+
+SELECT u.nomef, r.hora, c.nome, r.info, p.nomef
+FROM usuario u INNER JOIN 
+registro r on u.id_user = r.id_user INNER JOIN 
+chave c on r.id_key = c.id_key INNER JOIN
+prevencao p on r.id_prev = p.id_prev WHERE c.situacao = 1
+
+
+procedimentos para inserir usuário prevenção
+
